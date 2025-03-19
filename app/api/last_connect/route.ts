@@ -12,11 +12,7 @@ const supabase = createClient(
 
 export async function PATCH(req: NextRequest) {
     try {
-      const body = await req.json();
-      const { last_connect_time } = body; 
-      if (last_connect_time===undefined) {
-        return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-      }
+        const last_connect_time=new Date().toISOString();
       const { data, error } = await supabase
         .from("values")
         .update({last_connect_time })
