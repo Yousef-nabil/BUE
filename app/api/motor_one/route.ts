@@ -17,9 +17,10 @@ export async function PATCH(req: NextRequest) {
       if (motor_one_angle === undefined) {
         return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
       }
-      const { data, error } = await supabase
+      console.log(motor_one_angle);
+        const { data, error } = await supabase
         .from("values")
-        .update({ motor_one_angle:123,motor_one_dircetion })
+        .update({ motor_one_angle,motor_one_dircetion })
         .eq("id", 1) 
         .select(); 
   
