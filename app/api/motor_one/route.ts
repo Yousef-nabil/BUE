@@ -19,7 +19,7 @@ export async function PATCH(req: NextRequest) {
       }
       const { data, error } = await supabase
         .from("values")
-        .update({ motor_one_angle,motor_one_dircetion })
+        .update({ motor_one_angle:123,motor_one_dircetion })
         .eq("id", 1) 
         .select(); 
   
