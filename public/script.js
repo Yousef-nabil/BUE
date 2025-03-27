@@ -107,7 +107,7 @@ async function pressAction(motorType) {
         else
         x="motor_two_steps";
 
-        stepOutput.textContent = stepData[0].x || 0;
+        stepOutput.textContent = stepData[0].motor_two_steps || 0;
 
         // Display details
         alert(`${motorType.toUpperCase()} Motor Details:
