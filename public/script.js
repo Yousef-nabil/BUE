@@ -16,7 +16,7 @@ const motorStates = {
 };
 
 function rotateMotor(motorType, direction) {
-    console.log(`Rotate function called for ${motorType} in ${direction} direction`);
+   // console.log(Rotate function,] called for ${motorType} in ${direction} direction);
 
     // Get references to input and output elements
     const angleInput = document.getElementById(`${motorType}-angle`);
@@ -37,11 +37,11 @@ function rotateMotor(motorType, direction) {
     stepOutput.textContent = motorState.step;
 
     // Optional: Additional logging
-    console.log(`${motorType.toUpperCase()} state:`, motorState);
+    //console.log(${motorType.toUpperCase()} state:, motorState);
 }
 
 function pressAction(motorType) {
-    console.log(`Press action called for ${motorType}`);
+    //console.log(Press action called for ${motorType});
 
     const motorState = motorStates[motorType];
 
@@ -53,7 +53,7 @@ Current Step: ${motorState.step}`);
 }
 
 function resetMotor(motorType) {
-    console.log(`Reset called for ${motorType}`);
+   // console.log(Reset called for ${motorType});
 
     // Reset input and output elements
     const angleInput = document.getElementById(`${motorType}-angle`);
