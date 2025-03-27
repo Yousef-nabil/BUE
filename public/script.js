@@ -6,12 +6,12 @@ const motorStates = {
     nema17: {
         direction: null,
         angle: 0,
-        steps: 0
+        step: 0
     },
     nema23: {
         direction: null,
         angle: 0,
-        steps: 0
+        step: 0
     }
 };
 
@@ -20,17 +20,21 @@ function rotateMotor(motorType, direction) {
 
     // Get references to input and output elements
     const angleInput = document.getElementById(`${motorType}-angle`);
-    const stepsInput = document.getElementById(`${motorType}-steps`);
+    const stepOutput = document.getElementById(`${motorType}-step`);
 
-    // Parse angle and steps inputs or default to 0
+    // Parse angle input or default to 0
     const angle = angleInput.value ? parseInt(angleInput.value) : 0;
-    const steps = stepsInput.value ? parseInt(stepsInput.value) : 0;
 
     // Update motor state
     const motorState = motorStates[motorType];
     motorState.direction = direction;
     motorState.angle = angle;
-    motorState.steps = steps;
+
+    // Update step counter
+    motorState.step += (direction === 'clockwise') ? 1 : -1;
+
+    // Update UI
+    stepOutput.textContent = motorState.step;
 
     // Optional: Additional logging
     console.log(`${motorType.toUpperCase()} state:`, motorState);
@@ -45,7 +49,26 @@ function pressAction(motorType) {
     alert(`${motorType.toUpperCase()} Motor Details:
 Direction: ${motorState.direction || 'Not set'}
 Angle: ${motorState.angle} degrees
-Steps: ${motorState.steps}`);
+Current Step: ${motorState.step}`);
+}
+
+function resetMotor(motorType) {
+    console.log(`Reset called for ${motorType}`);
+
+    // Reset input and output elements
+    const angleInput = document.getElementById(`${motorType}-angle`);
+    const stepOutput = document.getElementById(`${motorType}-step`);
+
+    // Reset motor state
+    motorStates[motorType] = {
+        direction: null,
+        angle: 0,
+        step: 0
+    };
+
+    // Clear input and reset step display
+    angleInput.value = '';
+    stepOutput.textContent = '0';
 }
 
 // Optional: Log when DOM is fully loaded

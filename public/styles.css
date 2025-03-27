@@ -3,16 +3,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: Arial, sans-serif;
     background-color: #c6d6e2;
     color: #333;
-}
-
-/* Container */
-.container {
+  }
+  
+  /* Container */
+  .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -20,107 +20,82 @@ body {
     border: 2px solid #999;
     border-radius: 10px;
     padding: 20px;
-}
-
-/* Header */
-.header {
+  }
+  
+  /* Header */
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #8a9bae;
     padding: 10px;
     border-radius: 5px;
-}
-
-.header .logo {
+  }
+  
+  .header .logo {
     height: 50px;
-}
-
-.header h1 {
+  }
+  
+  .header h1 {
     text-align: center;
     flex-grow: 1;
     font-size: 2em;
-}
-
-/* Controls Section */
-.controls {
+  }
+  
+  /* Controls Section */
+  .controls {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
-}
-
-.motor-control {
+  }
+  
+  .motor-control {
     text-align: center;
     background-color: #dde5ed;
     border: 1px solid #888;
     padding: 15px;
     border-radius: 10px;
     width: 40%;
-    position: relative;
-}
-
-.motor-name {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.direction-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-
-.btn {
+  }
+  
+  .btn {
     background-color: #ccc;
     border: none;
-    margin: 0 5px;
+    margin: 5px;
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
+  }
+  
+  .btn:hover {
     background-color: #aaa;
-}
-
-.labels {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  }
+  
+  .labels {
     margin: 10px 0;
-}
-
-.input-group {
-    width: 80%;
-    margin-bottom: 10px;
-}
-
-.input-group label {
+  }
+  
+  .labels label {
     display: block;
-    text-align: left;
-    margin-bottom: 5px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
+    margin: 5px 0;
+  }
+  
+  input {
+    width: 70%;
+    padding: 5px;
+    margin-bottom: 10px;
     border: 1px solid #666;
     border-radius: 3px;
-    font-size: 1em;
-}
-
-.press {
+  }
+  
+  .press {
     background-color: #fff;
     border: 1px solid #333;
+  }
+  
+  .motor-name {
+    font-weight: bold;
     margin-top: 10px;
-}
-
-.press:hover {
-    background-color: #f0f0f0;
-}
+  }
+  

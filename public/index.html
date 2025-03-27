@@ -13,47 +13,41 @@
             <img src="/bue-logo.png" alt="BUE Logo" class="logo">
             <h1>Welcome</h1>
         </div>
-        
+
         <!-- Motor Control Sections -->
         <div class="controls">
             <!-- Left Section: Nema 17 -->
             <div class="motor-control">
-                <div class="motor-name">Nema 17</div>
-                <div class="direction-buttons">
-                    <button class="btn dir" onclick="rotateMotor('nema17', 'clockwise')">Clockwise</button>
-                    <button class="btn dir" onclick="rotateMotor('nema17', 'anticlockwise')">Anti-Clockwise</button>
-                </div>
+                <button class="btn dir" onclick="rotateMotor('nema17', 'clockwise')">Clockwise</button>
+                <button class="btn dir" onclick="rotateMotor('nema17', 'anticlockwise')">Anti-Clockwise</button>
+
                 <div class="labels">
-                    <div class="input-group">
-                        <label><strong>Angle</strong></label>
-                        <input type="number" id="nema17-angle" placeholder="Enter Angle">
-                    </div>
-                    <div class="input-group">
-                        <label><strong>Steps</strong></label>
-                        <input type="number" id="nema17-steps" placeholder="Enter Steps">
-                    </div>
+                    <label><strong>Angle</strong></label>
+                    <input type="number" id="nema17-angle" placeholder="Enter Angle">
+                    <label><strong>Step</strong></label>
+                    <output id="nema17-step">0</output>
                 </div>
+                
                 <button class="btn press" onclick="pressAction('nema17')">Press</button>
+                <button class="btn reset" onclick="resetMotor('nema17')">Reset</button>
+                <div class="motor-name">Nema 17</div>
             </div>
-            
+
             <!-- Right Section: Nema 23 -->
             <div class="motor-control">
-                <div class="motor-name">Nema 23</div>
-                <div class="direction-buttons">
-                    <button class="btn dir" onclick="rotateMotor('nema23', 'clockwise')">Clockwise</button>
-                    <button class="btn dir" onclick="rotateMotor('nema23', 'anticlockwise')">Anti-Clockwise</button>
-                </div>
+                <button class="btn dir" onclick="rotateMotor('nema23', 'clockwise')">Clockwise</button>
+                <button class="btn dir" onclick="rotateMotor('nema23', 'anticlockwise')">Anti-Clockwise</button>
+
                 <div class="labels">
-                    <div class="input-group">
-                        <label><strong>Angle</strong></label>
-                        <input type="number" id="nema23-angle" placeholder="Enter Angle">
-                    </div>
-                    <div class="input-group">
-                        <label><strong>Steps</strong></label>
-                        <input type="number" id="nema23-steps" placeholder="Enter Steps">
-                    </div>
+                    <label><strong>Angle</strong></label>
+                    <input type="number" id="nema23-angle" placeholder="Enter Angle">
+                    <label><strong>Step</strong></label>
+                    <output id="nema23-step">0</output>
                 </div>
+
                 <button class="btn press" onclick="pressAction('nema23')">Press</button>
+                <button class="btn reset" onclick="resetMotor('nema23')">Reset</button>
+                <div class="motor-name">Nema 23</div>
             </div>
         </div>
     </div>
@@ -62,6 +56,7 @@
     <script>
         console.log("Inline script loaded!");
     </script>
+
     <!-- Main script -->
     <script src="/script.js"></script>
 </body>
