@@ -108,7 +108,7 @@ async function pressAction(motorType) {
         x="motor_two_steps";
 
         stepOutput.textContent = stepData[0].motor_two_steps || 0;
-
+        document.getElementById("nema17-step").textContent = stepOutput.textContent;
         // Display details
         alert(`${motorType.toUpperCase()} Motor Details:
 Direction: ${direction}
