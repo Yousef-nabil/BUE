@@ -62,15 +62,27 @@ async function sendMotorCommand(motorType, angle, direction) {
     }
 }
 
+const selectedDirections = {};
+    function setDirection(motorType, direction) {
+        selectedDirections[motorType] = direction;
+    }
+
 function getSelectedDirection(motorType) {
-    const directionInputs = document.querySelectorAll(`input[name="${motorType}-direction"]`);
+   /* const directionInputs = document.querySelectorAll(`input[name="${motorType}-direction"]`);
     for (let input of directionInputs) {
         if (input.checked) {
             return input.value;
         }
     }
     return null;
+*/
+
+
+    return selectedDirections[motorType] || null;
+
 }
+
+
 
 async function initializeSteps() {
     try {
@@ -133,11 +145,55 @@ Angle: ${angle} degrees
 Current Stepp: ${JSON.stringify(stepData)|| 0}
 API Response: ${JSON.stringify(apiResponse, null, 2)}`);
     } catch (error) {
-        console.error('Press action failed:', error);
+        alert(error);
     }
 }
 
-// Optional: Log when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
-});
+
+
+    function setDirection(motorType, direction) {
+        selectedDirections[motorType] = direction;
+
+        // Optional: Highlight the active button
+        document.querySelectorAll(`.direction-select button`).forEach(btn => {
+            btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+    }
+
+    function getSelectedDirection(motorType) {
+        return selectedDirections[motorType] || null;
+    }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const controls = document.querySelectorAll(".motor-control");
+    
+    controls.forEach(control => {
+        const clockwiseBtn = control.querySelector(".dir[onclick*='clockwise']");
+        const anticlockwiseBtn = control.querySelector(".dir[onclick*='anticlockwise']");
+        
+        if (clockwiseBtn && anticlockwiseBtn) {
+            [clockwiseBtn, anticlockwiseBtn].forEach(button => {
+                button.addEventListener("click", function () {
+                    // Remove selected class from both buttons
+                    clockwiseBtn.classList.remove("selected");
+                    anticlockwiseBtn.classList.remove("selected");
+                    
+                    // Toggle selection for the clicked button
+                    this.classList.add("selected");
+                });
+            });
+        }
+    });
+  
+    // Add CSS styles for selected buttons
+    const style = document.createElement("style");
+    style.innerHTML = `
+        .selected {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: 2px solid #2E7D32;
+        }
+    `;
+    document.head.appendChild(style);
+  });

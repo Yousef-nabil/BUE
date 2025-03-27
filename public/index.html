@@ -18,15 +18,12 @@
         <div class="controls">
             <!-- Left Section: Nema 17 -->
             <div class="motor-control">
+        
+
+
                 <div class="direction-select">
-                    <label class="direction-label">
-                        <input type="radio" name="nema17-direction" value="clockwise">
-                        <img src="/clock-icon.png" alt="Clockwise">
-                    </label>
-                    <label class="direction-label">
-                        <input type="radio" name="nema17-direction" value="anticlockwise">
-                        <img src="/anticlock-icon.png" alt="Anti-Clockwise">
-                    </label>
+                    <button class="btn dir" onclick="setDirection('nema17', 'clockwise')">Clockwise</button>
+                    <button class="btn dir" onclick="setDirection('nema17', 'anticlockwise')">Anti-Clockwise</button>
                 </div>
 
                 <div class="labels">
