@@ -128,13 +128,7 @@ async function pressAction(motorType) {
         
 
 
-        if(motorType==="NEMA17")
             document.getElementById("nema17-step").textContent = stepOutput.textContent;
-
-        else
-             document.getElementById("nema26-step").textContent = stepOutput.textContent;
-
-
 
 
         // Display details
