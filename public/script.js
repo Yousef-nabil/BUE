@@ -1,17 +1,3 @@
-// Motor state tracking
-const motorStates = {
-    nema17: {
-        direction: null,
-        angle: 0,
-        step: 0
-    },
-    nema23: {
-        direction: null,
-        angle: 0,
-        step: 0
-    }
-};
-
 async function sendMotorCommand(motorType, angle, direction) {
     try {
         // Determine the correct API endpoint and payload based on motor type
@@ -34,6 +20,8 @@ async function sendMotorCommand(motorType, angle, direction) {
         const endpoint = apiEndpoints[motorType];
         const payload = payloadMap[motorType];
 
+        console.log('Sending payload:', payload);
+
         // Send PATCH request
         const response = await fetch(endpoint, {
             method: 'PATCH',
@@ -44,7 +32,8 @@ async function sendMotorCommand(motorType, angle, direction) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorText = await response.text();
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
         }
 
         const result = await response.json();
@@ -54,58 +43,48 @@ async function sendMotorCommand(motorType, angle, direction) {
     } catch (error) {
         console.error(`Error sending command to ${motorType}:`, error);
         alert(`Failed to send command to ${motorType}. Check console for details.`);
+        throw error;
     }
 }
 
-function rotateMotor(motorType, direction) {
-    console.log(`Rotate function called for ${motorType} in ${direction} direction`);
-
-    // Get references to input and output elements
-    const angleInput = document.getElementById(`${motorType}-angle`);
-    const stepOutput = document.getElementById(`${motorType}-step`);
-
-    // Parse angle input or default to 0
-    const angle = angleInput.value ? parseInt(angleInput.value) : 0;
-
-    // Update motor state
-    const motorState = motorStates[motorType];
-    motorState.direction = direction;
-    motorState.angle = angle;
-
-    // Update step counter
-    motorState.step += (direction === 'clockwise') ? 1 : -1;
-
-    // Update UI
-    stepOutput.textContent = motorState.step;
-
-    // Optional: Additional logging
-    console.log(`${motorType.toUpperCase()} state:`, motorState);
+function getSelectedDirection(motorType) {
+    const directionInputs = document.querySelectorAll(`input[name="${motorType}-direction"]`);
+    for (let input of directionInputs) {
+        if (input.checked) {
+            return input.value;
+        }
+    }
+    return null;
 }
 
 async function pressAction(motorType) {
     console.log(`Press action called for ${motorType}`);
 
-    const motorState = motorStates[motorType];
+    // Get angle from input
+    const angleInput = document.getElementById(`${motorType}-angle`);
+    const angle = angleInput.value ? parseInt(angleInput.value) : 0;
 
-    // Validate motor state before sending command
-    if (!motorState.direction || motorState.angle === 0) {
-        alert('Please set direction and angle before pressing');
+    // Get selected direction
+    const direction = getSelectedDirection(motorType);
+
+    // Validate inputs
+    if (!direction) {
+        alert('Please select a direction');
+        return;
+    }
+    if (angle === 0) {
+        alert('Please enter a non-zero angle');
         return;
     }
 
     try {
         // Send command to API
-        const apiResponse = await sendMotorCommand(
-            motorType, 
-            motorState.angle, 
-            motorState.direction
-        );
+        const apiResponse = await sendMotorCommand(motorType, angle, direction);
 
-        // Display motor state and API response
+        // Display details
         alert(`${motorType.toUpperCase()} Motor Details:
-Direction: ${motorState.direction}
-Angle: ${motorState.angle} degrees
-Current Step: ${motorState.step}
+Direction: ${direction}
+Angle: ${angle} degrees
 API Response: ${JSON.stringify(apiResponse, null, 2)}`);
     } catch (error) {
         console.error('Press action failed:', error);
@@ -115,20 +94,13 @@ API Response: ${JSON.stringify(apiResponse, null, 2)}`);
 function resetMotor(motorType) {
     console.log(`Reset called for ${motorType}`);
 
-    // Reset input and output elements
+    // Reset angle input
     const angleInput = document.getElementById(`${motorType}-angle`);
-    const stepOutput = document.getElementById(`${motorType}-step`);
-
-    // Reset motor state
-    motorStates[motorType] = {
-        direction: null,
-        angle: 0,
-        step: 0
-    };
-
-    // Clear input and reset step display
     angleInput.value = '';
-    stepOutput.textContent = '0';
+
+    // Deselect direction radio buttons
+    const directionInputs = document.querySelectorAll(`input[name="${motorType}-direction"]`);
+    directionInputs.forEach(input => input.checked = false);
 }
 
 // Optional: Log when DOM is fully loaded

@@ -18,14 +18,18 @@
         <div class="controls">
             <!-- Left Section: Nema 17 -->
             <div class="motor-control">
-                <button class="btn dir" onclick="rotateMotor('nema17', 'clockwise')">Clockwise</button>
-                <button class="btn dir" onclick="rotateMotor('nema17', 'anticlockwise')">Anti-Clockwise</button>
+                <div class="direction-select">
+                    <label>
+                        <input type="radio" name="nema17-direction" value="clockwise"> Clockwise
+                    </label>
+                    <label>
+                        <input type="radio" name="nema17-direction" value="anticlockwise"> Anti-Clockwise
+                    </label>
+                </div>
 
                 <div class="labels">
                     <label><strong>Angle</strong></label>
                     <input type="number" id="nema17-angle" placeholder="Enter Angle">
-                    <label><strong>Step</strong></label>
-                    <output id="nema17-step">0</output>
                 </div>
                 
                 <button class="btn press" onclick="pressAction('nema17')">Press</button>
@@ -35,14 +39,18 @@
 
             <!-- Right Section: Nema 23 -->
             <div class="motor-control">
-                <button class="btn dir" onclick="rotateMotor('nema23', 'clockwise')">Clockwise</button>
-                <button class="btn dir" onclick="rotateMotor('nema23', 'anticlockwise')">Anti-Clockwise</button>
+                <div class="direction-select">
+                    <label>
+                        <input type="radio" name="nema23-direction" value="clockwise"> Clockwise
+                    </label>
+                    <label>
+                        <input type="radio" name="nema23-direction" value="anticlockwise"> Anti-Clockwise
+                    </label>
+                </div>
 
                 <div class="labels">
                     <label><strong>Angle</strong></label>
                     <input type="number" id="nema23-angle" placeholder="Enter Angle">
-                    <label><strong>Step</strong></label>
-                    <output id="nema23-step">0</output>
                 </div>
 
                 <button class="btn press" onclick="pressAction('nema23')">Press</button>
@@ -52,12 +60,6 @@
         </div>
     </div>
 
-    <!-- Debug script to verify JavaScript loading -->
-    <script>
-        console.log("Inline script loaded!");
-    </script>
-
-    <!-- Main script -->
     <script src="/script.js"></script>
 </body>
 </html>
