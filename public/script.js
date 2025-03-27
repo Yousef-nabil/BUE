@@ -72,6 +72,24 @@ function getSelectedDirection(motorType) {
     return null;
 }
 
+async function initializeSteps() {
+    try {
+        const stepData = await fetchCurrentStep();
+        
+        // Ensure data is in the expected format
+        const nema17Steps = stepData[0]?.motor_one_steps || 0;
+        const nema23Steps = stepData[0]?.motor_two_steps || 0;
+
+        document.getElementById("nema17-step").textContent = nema17Steps;
+        document.getElementById("nema23-step").textContent = nema23Steps;
+
+        console.log(`Initialized steps: NEMA17 = ${nema17Steps}, NEMA23 = ${nema23Steps}`);
+    } catch (error) {
+        console.error('Failed to initialize steps:', error);
+    }
+}
+document.addEventListener('DOMContentLoaded', initializeSteps);
+
 async function pressAction(motorType) {
     console.log(`Press action called for ${motorType}`);
 
@@ -107,8 +125,18 @@ async function pressAction(motorType) {
         else
         x="motor_two_steps";
 
-        stepOutput.textContent = stepData[0].motor_two_steps || 0;
-        document.getElementById("nema17-step").textContent = stepOutput.textContent;
+        stepOutput.textContent = stepData[0].x || 0;
+
+
+        if(motorType==="NEMA17")
+            document.getElementById("nema17-step").textContent = stepOutput.textContent;
+
+        else
+             document.getElementById("nema26-step").textContent = stepOutput.textContent;
+
+
+
+
         // Display details
         alert(`${motorType.toUpperCase()} Motor Details:
 Direction: ${direction}
