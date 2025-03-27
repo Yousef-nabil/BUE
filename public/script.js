@@ -113,7 +113,7 @@ async function pressAction(motorType) {
         alert(`${motorType.toUpperCase()} Motor Details:
 Direction: ${direction}
 Angle: ${angle} degrees
-Current Step: ${stepData.step || 0}
+Current Step: ${stepData.x || 0}
 API Response: ${JSON.stringify(apiResponse, null, 2)}`);
     } catch (error) {
         console.error('Press action failed:', error);
