@@ -121,11 +121,11 @@ async function pressAction(motorType) {
         const stepOutput = document.getElementById(`${motorType}-step`);
         let x;
         if(motorType==="NEMA17")
-            x="motor_one_steps";
+            stepOutput.textContent = stepData[0].motor_one_steps || 0;
         else
-        x="motor_two_steps";
+        stepOutput.textContent = stepData[0].motor_two_steps || 0;
 
-        stepOutput.textContent = stepData[0].x || 0;
+        
 
 
         if(motorType==="NEMA17")
