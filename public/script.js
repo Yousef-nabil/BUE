@@ -118,17 +118,12 @@ async function pressAction(motorType) {
         const stepData = await fetchCurrentStep();
 
         // Update step display
-        const stepOutput = document.getElementById(`${motorType}-step`);
-        let x;
-        if(motorType==="NEMA17")
-            stepOutput.textContent = stepData[0].motor_one_steps || 0;
-        else
-        stepOutput.textContent = stepData[0].motor_two_steps || 0;
+       // Ensure data is in the expected format
+       const nema17Steps = stepData[0]?.motor_one_steps || 0;
+       const nema23Steps = stepData[0]?.motor_two_steps || 0;
 
-        
-
-
-            document.getElementById("nema17-step").textContent = stepOutput.textContent;
+       document.getElementById("nema17-step").textContent = nema17Steps;
+       document.getElementById("nema23-step").textContent = nema23Steps;
 
 
         // Display details
