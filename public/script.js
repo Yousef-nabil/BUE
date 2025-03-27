@@ -1,3 +1,18 @@
+// Fetch current step from backend
+async function fetchCurrentStep() {
+    try {
+        const response = await fetch('https://bue.vercel.app/api/hello');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data; // Assuming the response contains step information
+    } catch (error) {
+        console.error('Error fetching current step:', error);
+        return { step: 0 }; // Fallback value
+    }
+}
+
 async function sendMotorCommand(motorType, angle, direction) {
     try {
         // Determine the correct API endpoint and payload based on motor type
@@ -81,26 +96,22 @@ async function pressAction(motorType) {
         // Send command to API
         const apiResponse = await sendMotorCommand(motorType, angle, direction);
 
+        // Fetch current step
+        const stepData = await fetchCurrentStep();
+
+        // Update step display
+        const stepOutput = document.getElementById(`${motorType}-step`);
+        stepOutput.textContent = stepData.step || 0;
+
         // Display details
         alert(`${motorType.toUpperCase()} Motor Details:
 Direction: ${direction}
 Angle: ${angle} degrees
+Current Step: ${stepData.step || 0}
 API Response: ${JSON.stringify(apiResponse, null, 2)}`);
     } catch (error) {
         console.error('Press action failed:', error);
     }
-}
-
-function resetMotor(motorType) {
-    console.log(`Reset called for ${motorType}`);
-
-    // Reset angle input
-    const angleInput = document.getElementById(`${motorType}-angle`);
-    angleInput.value = '';
-
-    // Deselect direction radio buttons
-    const directionInputs = document.querySelectorAll(`input[name="${motorType}-direction"]`);
-    directionInputs.forEach(input => input.checked = false);
 }
 
 // Optional: Log when DOM is fully loaded
