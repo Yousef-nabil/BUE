@@ -101,7 +101,13 @@ async function pressAction(motorType) {
 
         // Update step display
         const stepOutput = document.getElementById(`${motorType}-step`);
-        stepOutput.textContent = stepData.step || 0;
+        let x;
+        if(motorType==="NEMA17")
+            x="motor_one_steps";
+        else
+        x="motor_two_steps";
+
+        stepOutput.textContent = stepData.x || 0;
 
         // Display details
         alert(`${motorType.toUpperCase()} Motor Details:
