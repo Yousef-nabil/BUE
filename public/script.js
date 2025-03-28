@@ -56,8 +56,7 @@ async function sendMotorCommand(motorType, angle, direction) {
     }
 
     const result = await response.json();
-    console.log(`${motorType.toUpperCase()} API Response:`, result);
-
+    alert('Done');
     return result;
   } catch (error) {
     console.error(`Error sending command to ${motorType}:`, error);
@@ -104,7 +103,7 @@ async function initializeSteps() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initializeSteps(); 
+  initializeSteps();
   setInterval(initializeSteps, 5000);
 });
 
@@ -133,18 +132,14 @@ async function pressAction(motorType) {
     const apiResponse = await sendMotorCommand(motorType, angle, direction);
 
     // Fetch current step
-    const stepData = await fetchCurrentStep();
-
     // Update step display
     // Ensure data is in the expected format
-   // const nema17Steps = stepData[0]?.motor_one_steps || 0;
-   // const nema23Steps = stepData[0]?.motor_two_steps || 0;
-
- //   document.getElementById("nema17-step").textContent = nema17Steps;
+    // const nema17Steps = stepData[0]?.motor_one_steps || 0;
+    // const nema23Steps = stepData[0]?.motor_two_steps || 0;
+    //document.getElementById("nema17-step").textContent = nema17Steps;
     //document.getElementById("nema23-step").textContent = nema23Steps;
-
     // Display details
-  //  alert(`${motorType.toUpperCase()} Motor Details:Direction: ${direction}Angle: ${angle} degreesAPI Response: ${JSON.stringify(apiResponse, null, 2)}`);
+    //  alert(`${motorType.toUpperCase()} Motor Details:Direction: ${direction}Angle: ${angle} degreesAPI Response: ${JSON.stringify(apiResponse, null, 2)}`);
   } catch (error) {
     alert(error);
   }
